@@ -1,12 +1,13 @@
 'use strict'
 
 const express = require('express')
-const rootController = require('./root-controller')
-
+const bodyParser = require('body-parser')
 const server = express()
-
-server.use('/', rootController)
 server.set('port', process.env.PORT || 8080);
+
+server.use(bodyParser.json())
+
+server.use('/readings', require('./controller/meter-reading-controller'))
 
 let start = () => {
     server.listen(server.get('port'), function() {
