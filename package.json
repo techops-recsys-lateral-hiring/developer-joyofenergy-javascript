@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha test/**/*spec.js",
     "start": "node src/app.js"
   },
   "author": "Seema Satish",
