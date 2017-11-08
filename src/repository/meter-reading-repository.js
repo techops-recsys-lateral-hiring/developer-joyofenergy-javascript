@@ -7,8 +7,8 @@ class MeterReadingRepository {
     }
 
     store(smartMeterId, readings) {
-        if (this.contains(smartMeterId)) {
-            existingListOfReadings = this.meterAssociatedReadings.get(smartMeterId)
+        if (this.meterAssociatedReadings.has(smartMeterId)) {
+            let existingListOfReadings = this.meterAssociatedReadings.get(smartMeterId)
             this.meterAssociatedReadings.set(smartMeterId, readings.concat(existingListOfReadings))
         } else {
             this.meterAssociatedReadings.set(smartMeterId, readings)
@@ -17,10 +17,6 @@ class MeterReadingRepository {
 
     find(smartMeterId) {
         return this.meterAssociatedReadings.get(smartMeterId)
-    }
-
-    contains(smartMeterId) {
-        return this.meterAssociatedReadings.get(smartMeterId) !== undefined
     }
 
 }

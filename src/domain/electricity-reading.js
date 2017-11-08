@@ -1,8 +1,8 @@
 class ElectricityReading {
 
-    constructor(time, reading) {
-        this.time = time
-        this.reading = reading
+    constructor(json) {
+        this.time = json.time
+        this.reading = json.reading
     }
 
     getTime() {
