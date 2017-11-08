@@ -7,12 +7,12 @@ const bodyParser = require('body-parser')
 
 chai.use(require('chai-http'))
 
-describe('Meter reading controller' , () => {
+describe('Electricity reading controller' , () => {
     let server
     beforeEach((next) => {
         server = express()
             .use(bodyParser.json())
-            .use('/readings', require('../../src/controller/meter-reading-controller'))
+            .use('/readings', require('../../src/controller/electricity-reading-controller'))
             .listen(next)
     })
 

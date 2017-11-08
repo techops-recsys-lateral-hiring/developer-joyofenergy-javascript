@@ -1,6 +1,6 @@
 'use strict'
 
-class MeterReadingRepository {
+class ElectricityReadingRepository {
 
     constructor() {
         this.meterAssociatedReadings = new Map()
@@ -21,4 +21,4 @@ class MeterReadingRepository {
 
 }
 
-module.exports = MeterReadingRepository
+module.exports = ElectricityReadingRepository

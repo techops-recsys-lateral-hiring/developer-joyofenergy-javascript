@@ -7,7 +7,7 @@ server.set('port', process.env.PORT || 8080);
 
 server.use(bodyParser.json())
 
-server.use('/readings', require('./controller/meter-reading-controller'))
+server.use('/readings', require('./controller/electricity-reading-controller'))
 
 let start = () => {
     server.listen(server.get('port'), function() {
