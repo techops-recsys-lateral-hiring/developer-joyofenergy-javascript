@@ -18,7 +18,7 @@ describe('Root' , () => {
         server.close()
     })
 
-    it('should return OK', () => {
+    it('Should return OK', () => {
         const port = server.address().port
         const agent = chai.request(`http://localhost:${port}`)
 

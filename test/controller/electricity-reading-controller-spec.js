@@ -20,12 +20,12 @@ describe('Electricity reading controller' , () => {
         server.close()
     })
 
-    it('should return same json posted', () => {
+    it ('Should successfully add the reading against new smart meter id', () => {
         const port = server.address().port
         const agent = chai.request(`http://localhost:${port}`)
 
         const readingJson = {
-            "meterId": "meter-11",
+            "smartMeterId": "meter-11",
             "electricityReadings": [
                 { "time": 1505825656838, "reading": 0.6 }
             ]
@@ -35,9 +35,9 @@ describe('Electricity reading controller' , () => {
             .post('/readings/store')
             .send(readingJson)
             .then((res) => {
+                console.log('Does this function run?')
                 expect(res.status).to.equal(200)
-                expect(res.get('Content-Type')).to.include('json')
-                expect(res.body).to.deep.equal(readingJson)
             })
+    
     })
 })

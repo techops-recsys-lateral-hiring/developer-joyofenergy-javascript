@@ -32,4 +32,5 @@ describe('Electricity Reading Repository', function() {
         expect(readings).to.deep.include(new ElectricityReading({ time: 1510053634000, reading: 0.75 }))
         expect(readings).to.deep.include(new ElectricityReading({ time: 1510572000000, reading: 0.32 }))
     })
+    
 })
