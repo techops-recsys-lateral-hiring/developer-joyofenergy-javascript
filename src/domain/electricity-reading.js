@@ -5,14 +5,6 @@ class ElectricityReading {
         this.reading = json.reading
     }
 
-    getTime() {
-        return this.time
-    }
-
-    getReading() {
-        return this.reading
-    }
-
 }
 
 module.exports = ElectricityReading
