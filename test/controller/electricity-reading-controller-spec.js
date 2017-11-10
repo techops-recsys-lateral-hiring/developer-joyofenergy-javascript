@@ -40,6 +40,41 @@ describe('Electricity reading controller' , () => {
     
     })
 
+    it ('Should successfully add the reading against existing smart meter id', () => {
+        const port = server.address().port
+        const agent = chai.request(`http://localhost:${port}`)  
+
+        const readingJson1 = {
+            "smartMeterId": "meter-100",
+            "electricityReadings": [
+                { "time": 1505825656838, "reading": 0.6 },
+                { "time": 1505825656848, "reading": 0.65 },
+            ]
+        }
+
+        const readingJson2 = {
+            "smartMeterId": "meter-100",
+            "electricityReadings": [
+                { "time": 1605825656849, "reading": 0.7 }
+            ]
+        }
+
+        return agent.post('/readings/store').send(readingJson1)
+            .then((res) => {
+                return agent.post('/readings/store').send(readingJson2)
+                    .then(res =>  {
+                        return agent.get('/readings/read/meter-100')
+                            .then(res => {
+                                expect(res.status).to.equal(200)
+                                expect(res.body.length).to.equal(3)
+                                expect(res.body).to.deep.include({ "time": 1505825656838, "reading": 0.6 })
+                                expect(res.body).to.deep.include({ "time": 1505825656848, "reading": 0.65 })
+                                expect(res.body).to.deep.include({ "time": 1605825656849, "reading": 0.7 })
+                            })
+                    })
+            })
+    })    
+
     it ('Should respond with error if smart meter id not set', () => {
         const port = server.address().port
         const agent = chai.request(`http://localhost:${port}`)

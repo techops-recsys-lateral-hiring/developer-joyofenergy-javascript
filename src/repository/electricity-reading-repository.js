@@ -16,9 +16,13 @@ class ElectricityReadingRepository {
     }
 
     find(smartMeterId) {
-        return this.meterAssociatedReadings.get(smartMeterId)
+        if (this.meterAssociatedReadings.has(smartMeterId)) {
+            return this.meterAssociatedReadings.get(smartMeterId)
+        } else {
+            return []
+        }        
     }
 
 }
 
-module.exports = ElectricityReadingRepository
+module.exports = new ElectricityReadingRepository()

@@ -1,6 +1,6 @@
 'use strict'
 
-const ElectricityReadingRepository = require('../repository/electricity-reading-repository')
+const electricityReadingRepository = require('../repository/electricity-reading-repository')
 const ElectricityReading = require('../domain/electricity-reading')
 const Ajv = require('ajv');
 const InvalidJsonException = require('./invalid-json-exception')
@@ -34,17 +34,20 @@ class ElectricityReadingService {
             "required": ["smartMeterId", "electricityReadings"]
           }
     }
-
+    
     storeReading(json) {
         let validJson = this.ajv.validate(this.validSchema, json)
         if (!validJson) {
             throw new InvalidJsonException(this.ajv.errors)
         }
         let readings = json.electricityReadings.map((reading) => new ElectricityReading(reading))
-        let repository = new ElectricityReadingRepository()
-        return repository.store(json.smartMeterId, readings)
+        return electricityReadingRepository.store(json.smartMeterId, readings)
     }  
-    
+
+    retrieveReadingsFor(smartMeterId) {
+      return electricityReadingRepository.find(smartMeterId)
+    }
+        
 }
 
 module.exports = ElectricityReadingService

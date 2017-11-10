@@ -2,12 +2,10 @@
 
 const chai = require('chai')
 const expect = chai.expect
-const ElectricityReadingRepository = require('../../src/repository/electricity-reading-repository')
+const electricityReadingRepository = require('../../src/repository/electricity-reading-repository')
 const ElectricityReading = require('../../src/domain/electricity-reading')
 
 describe('Electricity Reading Repository', function() {
-
-    let electricityReadingRepository = new ElectricityReadingRepository()
 
     before(() => {
         electricityReadingRepository.store('smart-meter-0', [

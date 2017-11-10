@@ -15,4 +15,15 @@ router.post('/store', function(req, res) {
     }
 })
 
+router.get('/read/:smartMeterId', function(req, res) {
+    let electricityReadingService = new ElectricityReadingService()
+    let smartMeterId = req.params.smartMeterId
+    let readings = electricityReadingService.retrieveReadingsFor(smartMeterId)
+    if (readings.length < 1) {
+        res.status(404).send('')
+    } else {
+        res.status(200).send(electricityReadingService.retrieveReadingsFor(smartMeterId))
+    }    
+})
+
 module.exports = router

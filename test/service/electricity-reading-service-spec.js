@@ -4,7 +4,7 @@ const chai = require('chai')
 const expect = chai.expect
 const sinon = require('sinon')
 const ElectricityReadingService = require('../../src/service/electricity-reading-service')
-const ElectricityReadingRepository = require('../../src/repository/electricity-reading-repository')
+const electricityReadingRepository = require('../../src/repository/electricity-reading-repository')
 const ElectricityReading = require('../../src/domain/electricity-reading')
 const InvalidJsonException = require('../../src/service/invalid-json-exception')
 
@@ -21,7 +21,7 @@ describe('Electricity Reading Service', function() {
             ]
         }
 
-        let repoMock = sinon.mock(ElectricityReadingRepository.prototype, 'store')
+        let repoMock = sinon.mock(electricityReadingRepository, 'store')
         repoMock.expects('store').withArgs('meter-45', [
             new ElectricityReading({ "time": Date.parse('2015-03-02T08:55:00'), "reading": 0.812 }),
             new ElectricityReading({ "time": Date.parse('2015-09-02T08:55:00'), "reading": 0.23 })
