@@ -10,13 +10,10 @@ class PricePlan {
     }
 
     getPrice(dateTime) {
-        let rate = this.unitRate
-        this.peakTimeMultipliers.forEach(peakTimeMultiplier => {
-            if (peakTimeMultiplier.day === dateTime.getDay()) {
-                rate = peakTimeMultiplier.multiplier;
-            }
+        let peakMultiplier = this.peakTimeMultipliers.find(multiplier => {
+            return multiplier.day === dateTime.getDay()
         });
-        return rate
+        return peakMultiplier ? peakMultiplier.multiplier : this.unitRate;
     }
 }
 
