@@ -99,8 +99,8 @@ GET
 ]
 ```
 
-### Calculate Usage Cost of Smart Meter against all Price Plans
-
+### View Current Price Plan and Compare Usage Cost Against all Price Plans
+ 
 #### Endpoint
 
 ```
@@ -109,15 +109,42 @@ GET
 ```
 
 `smartMeterId`: A string value, e.g. `smart-meter-0`
+ 
+#### Output
+```json
+{
+   "pricePlanId": "price-plan-2",
+   "pricePlanComparisons": { 
+       "price-plan-0": 21.78133785680731809,
+       ...
+   }
+}
+```
+ 
+### View Recommended Price Plans for Usage
+
+#### Endpoint
+
+```
+GET
+/price-plans/recommend/<smartMeterId>[?limit=<limit>]
+```
+
+`smartMeterId`: A string value, e.g. `smart-meter-0`
+
+limit`: Optional limit to display only a number of price plans, e.g. `2`
 
 #### Output
 
 ```json
-{
-    "price-plan-0": 21.78133785680731809,
+[
+    { 
+        "price-plan-0": 15.084324881035297
+    },
     ...
-}
+]
 ```
+
 
 ## Test
 
