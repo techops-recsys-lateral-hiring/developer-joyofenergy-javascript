@@ -16,4 +16,10 @@ router.get('/compare-all/:smartMeterId', function(req, res) {
     }
 })
 
+router.get('/recommend/:smartMeterId', function(req, res) {
+    const smartMeterId = req.params.smartMeterId
+    const pricePlanService = new PricePlanService()
+    const listOfSpendAgainstPricePlans = pricePlanService.getListOfSpendAgainstEachPricePlanFor(smartMeterId)
+    res.status(200).send(listOfSpendAgainstPricePlans)    
+})
 module.exports = router

@@ -29,9 +29,9 @@ describe('Price Plan Service', function() {
             new ElectricityReading({"time": 1510307135, "reading": 0.22644598149484024}) 
         ])
 
-        let spend = pricePlanService.getListOfSpendAgainstEachPricePlanFor('smart-meter-1001')
-        expect(spend).to.include(602.4650390344476)
-        expect(spend).to.include(120.49300780688952)
-        expect(spend).to.include(60.24650390344476)
+        let spend =  pricePlanService.getListOfSpendAgainstEachPricePlanFor('smart-meter-1001')
+        expect(spend[0]).to.eql({'X6': 60.24650390344476})
+        expect(spend[1]).to.eql({'X2': 120.49300780688952})
+        expect(spend[2]).to.eql({'X1': 602.4650390344476})
     })
 })

@@ -19,7 +19,15 @@ class PricePlanService {
         let consumedEnergy = average/timeElapsed
 
         let pricePlans = pricePlanRepository.get()
-        return pricePlans.map(pricePlan => consumedEnergy * pricePlan.unitRate) 
+        return this.cheapestPlansFirst(pricePlans).map(pricePlan => {
+            let cost = {}
+            cost[pricePlan.name] = consumedEnergy * pricePlan.unitRate
+            return cost;
+        })
+    }
+
+    cheapestPlansFirst(pricePlans) {
+        return pricePlans.sort((planA, planB) => planA.unitRate - planB.unitRate)
     }
 
     calculateAverageReading(readings) {
