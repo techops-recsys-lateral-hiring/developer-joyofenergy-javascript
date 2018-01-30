@@ -27,7 +27,7 @@ describe('Electricity reading controller' , () => {
         const readingJson = {
             "smartMeterId": "meter-11",
             "electricityReadings": [
-                { "time": 1505825656838, "reading": 0.6 }
+                { "time": 1505825656, "reading": 0.6 }
             ]
         }
 
@@ -47,15 +47,15 @@ describe('Electricity reading controller' , () => {
         const readingJson1 = {
             "smartMeterId": "meter-100",
             "electricityReadings": [
-                { "time": 1505825656838, "reading": 0.6 },
-                { "time": 1505825656848, "reading": 0.65 },
+                { "time": 1505825838, "reading": 0.6 },
+                { "time": 1505825848, "reading": 0.65 },
             ]
         }
 
         const readingJson2 = {
             "smartMeterId": "meter-100",
             "electricityReadings": [
-                { "time": 1605825656849, "reading": 0.7 }
+                { "time": 1605825849, "reading": 0.7 }
             ]
         }
 
@@ -67,9 +67,9 @@ describe('Electricity reading controller' , () => {
                             .then(res => {
                                 expect(res.status).to.equal(200)
                                 expect(res.body.length).to.equal(3)
-                                expect(res.body).to.deep.include({ "time": 1505825656838, "reading": 0.6 })
-                                expect(res.body).to.deep.include({ "time": 1505825656848, "reading": 0.65 })
-                                expect(res.body).to.deep.include({ "time": 1605825656849, "reading": 0.7 })
+                                expect(res.body).to.deep.include({ "time": 1505825838, "reading": 0.6 })
+                                expect(res.body).to.deep.include({ "time": 1505825848, "reading": 0.65 })
+                                expect(res.body).to.deep.include({ "time": 1605825849, "reading": 0.7 })
                             })
                     })
             })
@@ -81,7 +81,7 @@ describe('Electricity reading controller' , () => {
 
         const readingJson = {
             "electricityReadings": [
-                { "time": 1505825656838, "reading": 0.6 }
+                { "time": 1505825838, "reading": 0.6 }
             ]
         }
 

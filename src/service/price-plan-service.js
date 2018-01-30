@@ -3,6 +3,7 @@
 const ElectricityReadingService = require('./electricity-reading-service')
 const ElectricityReading = require('../domain/electricity-reading')
 const pricePlanRepository = require('../repository/price-plan-repository')
+const TimeConverter = require('../service/time-converter')
 
 class PricePlanService {
 
@@ -29,7 +30,7 @@ class PricePlanService {
     calculateTimeElapsed(readings) {
         let min = Math.min.apply(null, readings.map(r=>r.time))
         let max = Math.max.apply(null, readings.map(r=>r.time))
-        return (new Date(max-min)).getSeconds()/3600
+        return TimeConverter.timeElapsedInHours(min, max);
     }
 }
 

@@ -23,11 +23,13 @@ describe('Price Plan Service', function() {
                                     new PricePlan('X6', 'XS6', 1) ])
 
         let readingServiceMock = sinon.mock(ElectricityReadingService.prototype)
-        readingServiceMock.expects('retrieveReadingsFor').returns([new ElectricityReading({"time": 1510307115295, "reading": 0.5778640126312636}),
-                                    new ElectricityReading({"time": 1510307125295, "reading": 0.19979840426464207}),
-                                    new ElectricityReading({"time": 1510307135295, "reading": 0.22644598149484024}) ])
+        readingServiceMock.expects('retrieveReadingsFor').returns([
+            new ElectricityReading({"time": 1510307115, "reading": 0.5778640126312636}),
+            new ElectricityReading({"time": 1510307125, "reading": 0.19979840426464207}),
+            new ElectricityReading({"time": 1510307135, "reading": 0.22644598149484024}) 
+        ])
 
-        let spend =  pricePlanService.getListOfSpendAgainstEachPricePlanFor('smart-meter-1001')
+        let spend = pricePlanService.getListOfSpendAgainstEachPricePlanFor('smart-meter-1001')
         expect(spend).to.include(602.4650390344476)
         expect(spend).to.include(120.49300780688952)
         expect(spend).to.include(60.24650390344476)
