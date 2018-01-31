@@ -12,7 +12,7 @@ describe('Electricity Reading Generator', function() {
         let generated = generator(10)
         expect(generated.length).to.eq(10)
         for (let i = 0; i < 10; i++) {
-            expect(new Date(generated[i].time).getFullYear()).to.eq(2001)
+            expect(new Date(generated[i].time * 1000).getFullYear()).to.eq(2001)
             expect(generated[i].reading).to.be.above(0)
             expect(generated[i].reading).to.be.below(1)
         }

@@ -12,7 +12,7 @@ function randomIntBetween(min, max) {
 
 function generateElectricityReadings(num) {
     return (new Array(num).fill(1)).reduce((p, c) => {
-        let randomTime = Date.parse(`2001-${randomIntBetween(1,12)}-${randomIntBetween(1,28)}T${randomIntBetween(0,23)}:${randomIntBetween(0,59)}:${randomIntBetween(0,59)}`)
+        let randomTime = Date.parse(`2001-${randomIntBetween(1,12)}-${randomIntBetween(1,28)}T${randomIntBetween(0,23)}:${randomIntBetween(0,59)}:${randomIntBetween(0,59)}`) / 1000
         let randomReading = Math.floor(Math.random() * 1000)/1000;
         return p.concat(new ElectricityReading({time: randomTime, reading: randomReading}))
     }, []) 
