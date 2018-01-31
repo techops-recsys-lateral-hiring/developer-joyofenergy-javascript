@@ -19,7 +19,7 @@ const NUM_READINGS_AGAINST_METER = 5
 const populateRandomElectricityReadings = () => {
     let electricityReadingService = new ElectricityReadingService()
     Array.from({length: NUM_METERS}, (v,k)=>k+1).forEach(index => {
-        let smartMeterId = `meter${index}`
+        let smartMeterId = `meter-${index}`
         electricityReadingService.storeReading({
             "smartMeterId": smartMeterId,
             "electricityReadings": generateElectricityReadings(NUM_READINGS_AGAINST_METER)
