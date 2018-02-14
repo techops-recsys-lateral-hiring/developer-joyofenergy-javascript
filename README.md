@@ -15,7 +15,7 @@ JOI Energy is a new startup in the energy industry.
 Rather than selling energy they want to differentiate themselves from the market by recording their customers' energy usage from their smart meters and
 recommending the best suppler to meet their needs.
 
-You have been placed into their development team, whose current goal is to produce an API whereby their customers and smart meters will interact with.
+You have been placed into their development team, whose current goal is to produce an API which their customers and smart meters will interact with.
 
 Unfortunately, two of the team are on annual leave, and another has called in sick!
 You are left with a ThoughtWorker to progress with the current user stories on the story wall. This is your chance to make an impact on the business, improve the code base and deliver value.
