@@ -4,7 +4,7 @@ const chai = require('chai')
 const expect = chai.expect
 const sinon = require('sinon')
 const ElectricityReadingService = require('../../src/service/electricity-reading-service')
-const electricityReadingRepository = require('../../src/repository/electricity-reading-repository')
+const electricityReadingRepository =  require('../../src/repository/electricity-reading-repository')
 const ElectricityReading = require('../../src/domain/electricity-reading')
 const InvalidJsonException = require('../../src/service/invalid-json-exception')
 
@@ -40,7 +40,7 @@ describe('Electricity Reading Service', function() {
         "smartMeterId": "meter-34",
         "electricityReadings": []
     }    
-    jsonToErrors.set(emptyReadingsJson, ['should NOT have less than 1 items'])
+    jsonToErrors.set(emptyReadingsJson, ['should NOT have fewer than 1 items'])
 
     let incorrectMeterIdJson = {
         "smartMeterId": 23,
