@@ -22,7 +22,7 @@ You are left with a ThoughtWorker to progress with the current user stories on t
 
 ## Story Wall
 
-At JOI energy the development team use a story wall or kanban board to keep track of features or "stories" as they are worked on.
+At JOI Energy the development team use a story wall or kanban board to keep track of features or "stories" as they are worked on.
 
 The wall you will be working from today has 7 columns:
 
@@ -31,14 +31,14 @@ The wall you will be working from today has 7 columns:
 - In Dev
 - Ready for Testing
 - In Testing
-- Ready for sign off
+- Ready for Sign Off
 - Done
 
 Examples can be found here https://leankit.com/learn/kanban/kanban-board/
 
 ## Users
 
-To trial the new JOI software 5 people from the JOI accounts team have agreed to test the service and share their energy data.
+To trial the new JOI software, 5 people from the JOI accounts team have agreed to test the service and share their energy data.
 
 - Sarah - Smart Meter Id: "smart-meter-0", current power supplier: Dr Evil's Dark Energy.
 - Peter - Smart Meter Id: "smart-meter-1", current power supplier: The Green Eco.
@@ -132,7 +132,7 @@ GET
 
 `smartMeterId`: A string value, e.g. `smart-meter-0`
 
-limit`: Optional limit to display only a number of price plans, e.g. `2`
+`limit`: Optional limit to display only a number of price plans, e.g. `2`
 
 #### Output
 
