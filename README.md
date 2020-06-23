@@ -66,7 +66,7 @@ POST
 
 #### Input
 
-```json
+```
 {
     "smartMeterId": <smartMeterId>,
     "electricityReadings": [
@@ -92,7 +92,7 @@ GET
 
 #### Output
 
-```json
+```
 [
     { "time": "2017-09-07T10:37:52.362Z", "reading": 1.3524882598124337 },
     ...
@@ -111,7 +111,7 @@ GET
 `smartMeterId`: A string value, e.g. `smart-meter-0`
  
 #### Output
-```json
+```
 {
    "pricePlanId": "price-plan-2",
    "pricePlanComparisons": { 
@@ -136,7 +136,7 @@ limit`: Optional limit to display only a number of price plans, e.g. `2`
 
 #### Output
 
-```json
+```
 [
     { 
         "price-plan-0": 15.084324881035297
