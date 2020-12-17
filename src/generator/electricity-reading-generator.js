@@ -20,7 +20,7 @@ function generateElectricityReadings(num) {
 
 function generateReadingsPerMeter(num) {
     Array.from({length: 10}, (v,k)=>k+1).forEach(index => {
-        let smartMeterId = `meter-${index}`
+        let smartMeterId = `smart-meter-${index}`
         electricityReadingService.storeReading({
             "smartMeterId": smartMeterId,
             "electricityReadings": [electricityReadings[index-1]]

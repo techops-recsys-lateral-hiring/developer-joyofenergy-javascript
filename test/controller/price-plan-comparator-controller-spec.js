@@ -33,7 +33,7 @@ describe('Price plan comparator controller' , () => {
         const agent = chai.request(`http://localhost:${port}`)
 
         return agent
-            .get('/price-plans/compare-all/meter-1')
+            .get('/price-plans/compare-all/smart-meter-1')
             .then((res) => {
                 expect(res.status).to.equal(200)
                 expect(res.body.pricePlanId).to.equal('price-plan-1')
@@ -52,12 +52,12 @@ describe('Price plan comparator controller' , () => {
         ];
 
         const readingJson = {
-            "smartMeterId": "meter-103",
+            "smartMeterId": "smart-meter-103",
             "electricityReadings": readings
         }
 
         return agent.post('/readings/store').send(readingJson).then((res) => {
-            return agent.get('/price-plans/recommend/meter-103').then((res) => {
+            return agent.get('/price-plans/recommend/smart-meter-103').then((res) => {
                 expect(res.status).to.equal(200)
                 expect(res.body).to.eql([
                     { "price-plan-2": 38 },

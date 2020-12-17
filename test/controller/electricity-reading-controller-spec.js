@@ -25,7 +25,7 @@ describe('Electricity reading controller' , () => {
         const agent = chai.request(`http://localhost:${port}`)
 
         const readingJson = {
-            "smartMeterId": "meter-11",
+            "smartMeterId": "smart-meter-11",
             "electricityReadings": [
                 { "time": 1505825656, "reading": 0.6 }
             ]
@@ -45,7 +45,7 @@ describe('Electricity reading controller' , () => {
         const agent = chai.request(`http://localhost:${port}`)  
 
         const readingJson1 = {
-            "smartMeterId": "meter-100",
+            "smartMeterId": "smart-meter-100",
             "electricityReadings": [
                 { "time": 1505825838, "reading": 0.6 },
                 { "time": 1505825848, "reading": 0.65 },
@@ -53,7 +53,7 @@ describe('Electricity reading controller' , () => {
         }
 
         const readingJson2 = {
-            "smartMeterId": "meter-100",
+            "smartMeterId": "smart-meter-100",
             "electricityReadings": [
                 { "time": 1605825849, "reading": 0.7 }
             ]
@@ -63,7 +63,7 @@ describe('Electricity reading controller' , () => {
             .then((res) => {
                 return agent.post('/readings/store').send(readingJson2)
                     .then(res =>  {
-                        return agent.get('/readings/read/meter-100')
+                        return agent.get('/readings/read/smart-meter-100')
                             .then(res => {
                                 expect(res.status).to.equal(200)
                                 expect(res.body.length).to.equal(3)
@@ -99,7 +99,7 @@ describe('Electricity reading controller' , () => {
         const agent = chai.request(`http://localhost:${port}`)
 
         const readingJson = {
-            "smartMeterId": "meter-11"
+            "smartMeterId": "smart-meter-11"
         }
 
         return agent

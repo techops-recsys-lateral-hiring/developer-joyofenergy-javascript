@@ -14,7 +14,7 @@ describe('Electricity Reading Service', function() {
 
     it('Should call repository to store readings', function() {
         let json = {
-            "smartMeterId": "meter-45",
+            "smartMeterId": "smart-meter-45",
             "electricityReadings": [
                 { "time": Date.parse('2015-03-02T08:55:00'), "reading": 0.812 },
                 { "time": Date.parse('2015-09-02T08:55:00'), "reading": 0.23 }                
@@ -22,7 +22,7 @@ describe('Electricity Reading Service', function() {
         }
 
         let repoMock = sinon.mock(electricityReadingRepository, 'store')
-        repoMock.expects('store').withArgs('meter-45', [
+        repoMock.expects('store').withArgs('smart-meter-45', [
             new ElectricityReading({ "time": Date.parse('2015-03-02T08:55:00'), "reading": 0.812 }),
             new ElectricityReading({ "time": Date.parse('2015-09-02T08:55:00'), "reading": 0.23 })
         ])
@@ -37,7 +37,7 @@ describe('Electricity Reading Service', function() {
     jsonToErrors.set(emptyJson, ['should have required property \'smartMeterId\'', 'should have required property \'electricityReadings\''])
 
     let emptyReadingsJson = {
-        "smartMeterId": "meter-34",
+        "smartMeterId": "smart-meter-34",
         "electricityReadings": []
     }    
     jsonToErrors.set(emptyReadingsJson, ['should NOT have fewer than 1 items'])
@@ -49,13 +49,13 @@ describe('Electricity Reading Service', function() {
     jsonToErrors.set(incorrectMeterIdJson, ['should be string'])
 
     let incorrectElectricityReadingsJson = {
-        "smartMeterId": "meter-34",
+        "smartMeterId": "smart-meter-34",
         "electricityReadings": [{"yer": "whatwhat"}]        
     }    
     jsonToErrors.set(incorrectElectricityReadingsJson, ['should have required property \'time\'', 'should have required property \'reading\''])
 
     let onlyTimeReadingsJson = {
-        "smartMeterId": "meter-34",
+        "smartMeterId": "smart-meter-34",
         "electricityReadings": [{"time": Date.parse('2015-03-02T08:55:00')}]        
     }    
     jsonToErrors.set(onlyTimeReadingsJson, ['should have required property \'reading\''])
