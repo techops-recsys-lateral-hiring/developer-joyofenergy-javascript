@@ -208,11 +208,11 @@ The project requires at least node v10.
 Application will start on port `8080`.
 
 ```console
-$ npm start
+$ yarn start
 ```
 
 ### Run the tests
 
 ```console
-$ npm t
+$ yarn test 
 ```
