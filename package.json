@@ -2,20 +2,21 @@
   "name": "joi-energy-js",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
   "scripts": {
-    "test": "mocha test/**/*spec.js",
-    "start": "node src/app.js"
+    "test": "jest",
+    "test-watch": "jest --watchAll",
+    "start": "node src/app",
+    "dev": "nodemon --inspect"
   },
-  "author": "Seema Satish",
+  "author": "Gabriel McCallin",
   "license": "ISC",
   "dependencies": {
-    "ajv": "^6.12.2",
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "express": "^4.17.1",
-    "mocha": "^7.2.0",
-    "rewire": "^5.0.0",
-    "sinon": "^9.0.2"
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.19",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.6"
   }
 }
