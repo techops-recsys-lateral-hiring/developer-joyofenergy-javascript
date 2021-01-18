@@ -1,25 +1,32 @@
-'use strict'
+const express = require("express");
+const bodyParser = require("body-parser");
+const { readings } = require("./readings/readings");
+const { readingsData } = require("./readings/readings.data");
+const { read, store } = require("./readings/readings-controller");
+const { recommend, compare } = require("./price-plans/price-plans-controller");
 
-const express = require('express')
-const bodyParser = require('body-parser')
-const initializeData = require('./app-initializer')
-const server = express()
-server.set('port', process.env.PORT || 8080);
+const app = express();
+app.use(bodyParser.json());
 
-server.use(bodyParser.json())
-server.use(function (err, req, res, next) {
-    console.error(err.stack)
-    res.status(500).send('Internal server error')
-})
+const { getReadings, setReadings } = readings(readingsData);
 
-server.use('/readings', require('./controller/electricity-reading-controller'))
-server.use('/price-plans', require('./controller/price-plan-comparator-controller'))
+app.get("/readings/read/:smartMeterId", (req, res) => {
+    res.send(read(getReadings, req));
+});
 
-const start = () => {
-    server.listen(server.get('port'), function() {
-        initializeData()
-        console.log(`router started on http://localhost:${server.get('port')}; press Ctrl-C to terminate.`)
-    })
-}
+app.post("/readings/store", (req, res) => {
+    res.send(store(setReadings, req));
+});
 
-start()
+app.get("/price-plans/recommend/:smartMeterId", (req, res) => {
+    res.send(recommend(getReadings, req));
+});
+
+app.get("/price-plans/compare-all/:smartMeterId", (req, res) => {
+    res.send(compare(getReadings, req));
+});
+
+const port = process.env.PORT || 8080;
+app.listen(port);
+
+console.log(`🚀 app listening on port ${port}`);

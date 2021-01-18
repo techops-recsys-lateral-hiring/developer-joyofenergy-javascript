@@ -36,33 +36,89 @@ Examples can be found here [https://leankit.com/learn/kanban/kanban-board/](http
 
 To trial the new JOI software 5 people from the JOI accounts team have agreed to test the service and share their energy data.
 
-| User    | Smart Meter ID | Power Supplier        |
-| ------- | -------------- | --------------------- |
-| Sarah   | `smart-meter-0`      | Dr Evil's Dark Energy |
-| Peter   | `smart-meter-1`      | The Green Eco         |
-| Charlie | `smart-meter-2`      | Dr Evil's Dark Energy |
-| Andrea  | `smart-meter-3`      | Power for Everyone    |
-| Alex    | `smart-meter-4`      | The Green Eco         |
+| User    | Smart Meter ID  | Power Supplier        |
+| ------- | --------------- | --------------------- |
+| Sarah   | `smart-meter-0` | Dr Evil's Dark Energy |
+| Peter   | `smart-meter-1` | The Green Eco         |
+| Charlie | `smart-meter-2` | Dr Evil's Dark Energy |
+| Andrea  | `smart-meter-3` | Power for Everyone    |
+| Alex    | `smart-meter-4` | The Green Eco         |
 
 These values are used in the code and in the following examples too.
 
-## Overview
+## Getting started
+❗️ The project requires at least node v10.
+### Install dependencies
 
-JOI Energy is a new energy company that uses data to ensure customers are able to be on the best price plan for their energy consumption.
+```
+npm install
+```
+
+### Run the application
+
+
+```console
+$ npm start
+```
+_Application will start on port `8080`._
+
+### Run the application with reload on save
+
+```console
+$ npm run dev
+```
+_Application will start on port `8080`._
+
+### Run the tests
+
+```console
+$ npm t
+```
+
+_Tests will run in watch mode._
+
 
 ## API
 
 Below is a list of API endpoints with their respective input and output. Please note that the application needs to be running. For more information about how to run the application, please refer to [run the application](#run-the-application) section below.
 
-### Store Readings
+---
+### ➡️
+### Get readings
+```
+GET /readings/read/<smartMeterId>
+```
 
-Endpoint
+Parameters
 
+| Parameter      | Description       |
+| -------------- | ----------------- |
+| `smartMeterId` | Id of smart meter |
+
+### Example with CURL
+
+```console
+$ curl "http://localhost:8080/readings/read/smart-meter-0"
+```
+
+Example output
+
+```json
+[
+  { "time": 1607686125, "reading": 0.0503 },
+  { "time": 1607685125, "reading": 0.0213 },
+  ...
+]
+```
+
+---
+### ➡️
+### Store readings
 ```
 POST /readings/store
 ```
 
-Example of body
+Payload should be in this format
 
 ```json
 {
@@ -90,7 +146,7 @@ Example readings
 | `1607686125`        |         0.0503 |
 | `1607685125`        |         0.0213 |
 
-Using CURL
+### Example with CURL
 
 ```console
 $ curl \
@@ -100,39 +156,11 @@ $ curl \
   -d '{"smartMeterId":"smart-meter-0","electricityReadings":[{"time":1607686125,"reading":0.0503},{"time":1607685125,"reading":0.0213}]}'
 ```
 
-The above command returns 200 OK and `{}`.
+The above command returns 200 OK and all the readings for the smart meter.
 
-### Get Stored Readings
-
-Endpoint
-
-```
-GET /readings/read/<smartMeterId>
-```
-
-Parameters
-
-| Parameter      | Description       |
-| -------------- | ----------------- |
-| `smartMeterId` | Id of smart meter |
-
-Using CURL
-
-```console
-$ curl "http://localhost:8080/readings/read/smart-meter-0"
-```
-
-Example output
-
-```json
-[
-  { "time": 1607686125, "reading": 0.0503 },
-  { "time": 1607685125, "reading": 0.0213 },
-  ...
-]
-```
-
-### View Current Price Plan and Compare Usage Cost Against all Price Plans
+---
+### ➡️
+### View current price plan and compare usage cost against all price plans
 
 Endpoint
 
@@ -146,7 +174,7 @@ Parameters
 | -------------- | ----------------- |
 | `smartMeterId` | Id of smart meter |
 
-Retrieving readings using CURL
+### Example with CURL
 
 ```console
 $ curl "http://localhost:8080/price-plans/compare-all/smart-meter-0"
@@ -156,13 +184,24 @@ Example output
 
 ```json
 {
-    "DrEvilsDarkEnergy": 94.87181867550794,
-    "TheGreenEco": 18.974363735101587,
-    "PowerForEveryone": 9.487181867550794
+  "smartMeterId": "smart-meter-0",
+  "pricePlanComparisons": [
+    {
+      "price-plan-0": 1.3096450044345258
+    },
+    {
+      "price-plan-1": 0.2619290008869052
+    },
+    {
+      "price-plan-2": 0.1309645004434526
+    }
+  ]
 }
 ```
 
-### View Recommended Price Plans for Usage
+---
+### ➡️
+### View recommended price plans for usage
 
 Endpoint
 
@@ -176,7 +215,8 @@ Parameters
 | -------------- | ----------------- |
 | `smartMeterId` | Id of smart meter |
 
-Using CURL
+
+### Example with CURL
 
 ```console
 $ curl "http://localhost:8080/price-plans/recommend/smart-meter-0"
@@ -186,33 +226,16 @@ Example output
 
 ```json
 [
-    {
-        "key": "PowerForEveryone",
-        "value": 9.487181867550794
-    },
-    {
-        "key": "TheGreenEco",
-        "value": 18.974363735101587
-    }
+  {
+    "price-plan-2": 0.00010327563922623473
+  },
+  {
+    "price-plan-1": 0.00020655127845246946
+  },
+  {
+    "price-plan-0": 0.0010327563922623473
+  }
 ]
 ```
 
-## Requirements
 
-The project requires at least node v10.
-
-## Useful commands
-
-### Run the application
-
-Application will start on port `8080`.
-
-```console
-$ npm start
-```
-
-### Run the tests
-
-```console
-$ npm t
-```
