@@ -10,6 +10,13 @@ const {
 } = require("./usage");
 
 describe("usage", () => {
+
+    it("should return 0 when usage get empty readings", () => {
+        const usageMeter = usage([]);
+
+        expect(usageMeter).toEqual(0);
+    })
+
     it("should average all readings for a meter", () => {
         const { getReadings } = readings({
             [meters.METER0]: [

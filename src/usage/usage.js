@@ -16,7 +16,11 @@ const timeElapsedInHours = (readings) => {
 };
 
 const usage = (readings) => {
-    return average(readings) / timeElapsedInHours(readings);
+    const timeElapsed = timeElapsedInHours(readings);
+    if(timeElapsed === 0) {
+        return 0;
+    }
+    return average(readings) / timeElapsed;
 };
 
 const usageCost = (readings, rate) => {
