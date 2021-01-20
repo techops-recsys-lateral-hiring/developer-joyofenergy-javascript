@@ -24,6 +24,12 @@ describe("usage", () => {
         expect(averageMeter0).toBe(0.26785);
     });
 
+    it("should return 0 when timeElapsedInHours get empty readings", () => {
+        const timeElapsed = timeElapsedInHours([]);
+
+        expect(timeElapsed).toEqual(0);
+    })
+
     it("should get time elapsed in hours for all readings for a meter", () => {
         const { getReadings } = readings({
             [meters.METER0]: [
