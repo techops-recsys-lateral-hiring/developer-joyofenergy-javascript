@@ -1,12 +1,12 @@
 # Welcome to PowerDale
 
-PowerDale is a small town with around 100 residents. Most houses have a smart meter installed that can save and send information about how much energy a house has used.
+PowerDale is a small town with around 100 residents. Most houses have a smart meter installed that can save and send information about how much power a house is drawing/using.
 
 There are three major providers of energy in town that charge different amounts for the power they supply.
 
--   _Dr Evil's Dark Energy_
--   _The Green Eco_
--   _Power for Everyone_
+- _Dr Evil's Dark Energy_
+- _The Green Eco_
+- _Power for Everyone_
 
 # Introducing JOI Energy
 
@@ -22,13 +22,13 @@ At JOI energy the development team use a story wall or Kanban board to keep trac
 
 The wall you will be working from today has 7 columns:
 
--   Backlog
--   Ready for Dev
--   In Dev
--   Ready for Testing
--   In Testing
--   Ready for sign off
--   Done
+- Backlog
+- Ready for Dev
+- In Dev
+- Ready for Testing
+- In Testing
+- Ready for sign off
+- Done
 
 Examples can be found here [https://leankit.com/learn/kanban/kanban-board/](https://leankit.com/learn/kanban/kanban-board/)
 
@@ -46,79 +46,65 @@ To trial the new JOI software 5 people from the JOI accounts team have agreed to
 
 These values are used in the code and in the following examples too.
 
-## Getting started
-❗️ The project requires at least node v10.
+## Requirements
+
+The project requires [Node v10](https://nodejs.org/en/blog/release/v10.23.0/).
+
+## Useful Node commands
+
+The project makes use of node and its package manager to help you out carrying some common tasks such as building the project or running it.
+
 ### Install dependencies
 
-```
-npm install
-```
-
-### Run the application
-
-
 ```console
-$ npm start
+$ npm install
 ```
-_Application will start on port `8080`._
-
-### Run the application with reload on save
-
-```console
-$ npm run dev
-```
-_Application will start on port `8080`._
 
 ### Run the tests
 
-```console
-$ npm t
-```
+There are two options to run the tests
 
-_Tests will run in watch mode._
+- Run the tests once
 
+  ```console
+  $ npm test
+  ```
+
+- Keep running the tests with every change
+
+  ```console
+  $ npm run test-watch
+  ```
+
+### Run the application
+
+Run the application which will be listening on port `8080`. There are two way to run the application.
+
+- Run the application with the current code
+
+  ```console
+  $ npm start
+  ```
+
+- Run the application with reload on save
+
+  ```console
+  $ npm run dev
+  ```
 
 ## API
 
-Below is a list of API endpoints with their respective input and output. Please note that the application needs to be running. For more information about how to run the application, please refer to [run the application](#run-the-application) section below.
+Below is a list of API endpoints with their respective input and output. Please note that the application needs to be running for the following endpoints to work. For more information about how to run the application, please refer to [run the application](#run-the-application) section above.
 
----
-### ➡️
-### Get readings
-```
-GET /readings/read/<smartMeterId>
-```
-
-Parameters
-
-| Parameter      | Description       |
-| -------------- | ----------------- |
-| `smartMeterId` | Id of smart meter |
-
-### Example with CURL
-
-```console
-$ curl "http://localhost:8080/readings/read/smart-meter-0"
-```
-
-Example output
-
-```json
-[
-  { "time": 1607686125, "reading": 0.0503 },
-  { "time": 1607685125, "reading": 0.0213 },
-  ...
-]
-```
-
----
-### ➡️
 ### Store readings
-```
+
+Endpoint
+
+```text
 POST /readings/store
 ```
 
-Payload should be in this format
+Example of body
 
 ```json
 {
@@ -133,48 +119,88 @@ Payload should be in this format
 
 Parameters
 
-| Parameter      | Description                     |
-| -------------- | ------------------------------- |
-| `smartMeterId` | Id of the smart meter           |
-| `time`         | The time when the reading taken |
-| `reading`      | The measured kW load            |
+| Parameter      | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `smartMeterId` | One of the smart meters' id listed above             |
+| `time`         | The date/time (as epoch) when the _reading_ is taken |
+| `reading`      | The consumption in `kW` at the _time_ of the reading |
 
 Example readings
 
-| Date (`Epoch time`) | Reading (`kW`) |
-| ------------------- | -------------: |
-| `1607686125`        |         0.0503 |
-| `1607685125`        |         0.0213 |
+| Date (`GMT`)      | Epoch timestamp | Reading (`kW`) |
+| ----------------- | --------------: | -------------: |
+| `2020-11-11 8:00` |      1605081600 |         0.0503 |
+| `2020-11-12 8:00` |      1605168000 |         0.0213 |
 
-### Example with CURL
+In the above example, `0.0213 kW` were being consumed at `2020-11-12 8:00`. The reading indicates the powered being used at the time of the reading. If no power is being used at the time of reading, then the reading value will be `0`. Given that `0` may introduce new challenges, we can assume that there is always some consumption and we will never have a `0` reading value.
+
+Posting readings using CURL
 
 ```console
 $ curl \
   -X POST \
   -H "Content-Type: application/json" \
   "http://localhost:8080/readings/store" \
-  -d '{"smartMeterId":"smart-meter-0","electricityReadings":[{"time":1607686125,"reading":0.0503},{"time":1607685125,"reading":0.0213}]}'
+  -d '{"smartMeterId":"smart-meter-0","electricityReadings":[{"time":1605081600,"reading":0.0503},{"time":1605168000,"reading":0.0213}]}'
 ```
 
-The above command returns 200 OK and all the readings for the smart meter.
+The above command will return an array with all readings.
 
----
-### ➡️
-### View current price plan and compare usage cost against all price plans
+Example output
+
+```json
+[
+  { "time":1605081600, "reading":0.0503 },
+  { "time":1605168000, "reading":0.0213 },
+  ...
+]
+```
+
+### Get Stored Readings
 
 Endpoint
 
 ```
+GET /readings/read/<smartMeterId>
+```
+
+Parameters
+
+| Parameter      | Description                              |
+| -------------- | ---------------------------------------- |
+| `smartMeterId` | One of the smart meters' id listed above |
+
+Retrieving readings using CURL
+
+```console
+$ curl "http://localhost:8080/readings/read/smart-meter-0"
+```
+
+Example output
+
+```json
+[
+  { "time": "2020-11-11T08:00:00.000000Z", "reading": 0.0503 },
+  { "time": "2020-11-12T08:00:00.000000Z", "reading": 0.0213 },
+  ...
+]
+```
+
+### View Current Price Plan and Compare Usage Cost Against all Price Plans
+
+Endpoint
+
+```text
 GET /price-plans/compare-all/<smartMeterId>
 ```
 
 Parameters
 
-| Parameter      | Description       |
-| -------------- | ----------------- |
-| `smartMeterId` | Id of smart meter |
+| Parameter      | Description                              |
+| -------------- | ---------------------------------------- |
+| `smartMeterId` | One of the smart meters' id listed above |
 
-### Example with CURL
+Retrieving readings using CURL
 
 ```console
 $ curl "http://localhost:8080/price-plans/compare-all/smart-meter-0"
@@ -186,56 +212,39 @@ Example output
 {
   "smartMeterId": "smart-meter-0",
   "pricePlanComparisons": [
-    {
-      "price-plan-0": 1.3096450044345258
-    },
-    {
-      "price-plan-1": 0.2619290008869052
-    },
-    {
-      "price-plan-2": 0.1309645004434526
-    }
+    { "price-plan-0": 0.0022953153900802437 },
+    { "price-plan-1": 0.00045906307801604876 },
+    { "price-plan-2": 0.00022953153900802438 }
   ]
 }
 ```
 
----
-### ➡️
-### View recommended price plans for usage
+### View Recommended Price Plans for Usage
 
 Endpoint
 
-```
-GET /price-plans/recommend/<smartMeterId>
+```text
+GET /price-plans/recommend/<smartMeterId>[?limit=<limit>]
 ```
 
 Parameters
 
-| Parameter      | Description       |
-| -------------- | ----------------- |
-| `smartMeterId` | Id of smart meter |
+| Parameter      | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `smartMeterId` | One of the smart meters' id listed above             |
+| `limit`        | (Optional) limit the number of plans to be displayed |
 
-
-### Example with CURL
+Retrieving readings using CURL
 
 ```console
-$ curl "http://localhost:8080/price-plans/recommend/smart-meter-0"
+$ curl "http://localhost:8080/price-plans/recommend/smart-meter-0?limit=2"
 ```
 
 Example output
 
 ```json
 [
-  {
-    "price-plan-2": 0.00010327563922623473
-  },
-  {
-    "price-plan-1": 0.00020655127845246946
-  },
-  {
-    "price-plan-0": 0.0010327563922623473
-  }
+  { "price-plan-2": 0.00022953153900802438 },
+  { "price-plan-1": 0.00045906307801604876 }
 ]
 ```
-
-
