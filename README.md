@@ -132,7 +132,7 @@ Example readings
 | `2020-11-11 8:00` |      1605081600 |         0.0503 |
 | `2020-11-12 8:00` |      1605168000 |         0.0213 |
 
-In the above example, `0.0213 kW` were being consumed at `2020-11-12 8:00`. The reading indicates the powered being used at the time of the reading. If no power is being used at the time of reading, then the reading value will be `0`. Given that `0` may introduce new challenges, we can assume that there is always some consumption and we will never have a `0` reading value.
+In the above example, `0.0213 kW` were being consumed at `2020-11-12 8:00`. The reading indicates the power being used at the time of the reading. If no power is being used at the time of reading, then the reading value will be `0`. Given that `0` may introduce new challenges, we can assume that there is always some consumption and we will never have a `0` reading value.
 
 Posting readings using CURL
 
