@@ -57,7 +57,7 @@ These values are used in the code and in the following examples too.
 
 ## Requirements
 
-The project requires [Node v10](https://nodejs.org/en/blog/release/v10.23.0/).
+The project requires [Node v14](https://nodejs.org/).
 
 ## Useful Node commands
 
