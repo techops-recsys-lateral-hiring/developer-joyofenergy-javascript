@@ -12,15 +12,9 @@ const generateSingle = () => {
 };
 
 const generateAllMeters = () => {
-    const readings = {};
-
-    for (const key in meters) {
-        if (meters.hasOwnProperty(key)) {
-            readings[meters[key]] = generateSingle();
-        }
-    }
-
-    return readings;
+    return Object.assign({}, ...Object.entries(meters).map(([, value]) => ({
+        [value]: generateSingle()
+    })));
 };
 
 const readingsData = generateAllMeters();
