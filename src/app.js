@@ -1,12 +1,11 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const { readings } = require("./readings/readings");
 const { readingsData } = require("./readings/readings.data");
 const { read, store } = require("./readings/readings-controller");
 const { recommend, compare } = require("./price-plans/price-plans-controller");
 
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 
 const { getReadings, setReadings } = readings(readingsData);
 
