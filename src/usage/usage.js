@@ -13,7 +13,7 @@ const timeElapsedInHours = (readings) => {
 };
 
 const usage = (readings) => {
-    return average(readings) / timeElapsedInHours(readings);
+    return average(readings) / (timeElapsedInHours(readings) || 1);
 };
 
 const usageCost = (readings, rate) => {
