@@ -17,7 +17,7 @@ const extractCost = (cost) => {
 
 const compare = (getData, req) => {
     const meter = req.params.smartMeterId;
-    const pricePlanComparisons = usageForAllPricePlans(pricePlans, getData(meter));;
+    const pricePlanComparisons = usageForAllPricePlans(pricePlans, getData(meter));
     return {
         smartMeterId: req.params.smartMeterId,
         pricePlanComparisons,
